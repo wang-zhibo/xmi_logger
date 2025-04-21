@@ -1,0 +1,470 @@
+2025-04-21 21:37:14 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 这是一条错误日志
+2025-04-21 21:37:14 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 这是一条严重错误日志
+2025-04-21 21:37:44 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 这是一条错误日志
+2025-04-21 21:37:44 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 这是一条严重错误日志
+2025-04-21 21:39:43 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 这是一条错误日志
+2025-04-21 21:39:43 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 这是一条严重错误日志
+2025-04-21 21:39:43 | ERROR    | ReqID:no-request-id | xmi_logger.my_logger:exception_handler:298 - 未处理的异常: AttributeError: 'Logger' object has no attribute 'log_with_category'
+NoneType: None
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 这是一条错误日志
+2025-04-21 21:40:49 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 这是一条严重错误日志
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | xmi_logger.my_logger:log_with_category:297 - 分类: api - API请求失败
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | xmi_logger.my_logger:_log_exception:466 - 发生异常: 除零错误 [ZeroDivisionError]: division by zero
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | xmi_logger.my_logger:_log_exception:468 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x103d5f250>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/my_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x103d5f1c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | __main__:<module>:84 - 捕获到除零错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x103d5f250>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/my_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x103d5f1c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | xmi_logger.my_logger:_log_exception:468 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x103d8d000>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/my_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x103d5f370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x103453c70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x103453490>
+           └ <json.decoder.JSONDecoder object at 0x102e2bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x103434860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x103453520>
+               └ <json.decoder.JSONDecoder object at 0x102e2bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | __main__:<module>:89 - 捕获到JSON解析错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x103d8d000>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/my_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x103d5f370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x103453c70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x103453490>
+           └ <json.decoder.JSONDecoder object at 0x102e2bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x103434860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x103453520>
+               └ <json.decoder.JSONDecoder object at 0x102e2bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:40:52 | ERROR    | ReqID:no-request-id | xmi_logger.my_logger:exception_handler:311 - 未处理的异常: AttributeError: 'Logger' object has no attribute 'get_stats'
+NoneType: None
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 这是一条错误日志
+2025-04-21 21:42:35 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 这是一条严重错误日志
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 分类: api - API请求失败
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:466 - 发生异常: 除零错误 [ZeroDivisionError]: division by zero
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10b397250>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10b3971c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | __main__:<module>:84 - 捕获到除零错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10b397250>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10b3971c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x10b3c5000>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10b397370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x10aa8bc70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x10aa8b490>
+           └ <json.decoder.JSONDecoder object at 0x10a45fee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x10a468860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x10aa8b520>
+               └ <json.decoder.JSONDecoder object at 0x10a45fee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | __main__:<module>:89 - 捕获到JSON解析错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x10b3c5000>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10b397370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x10aa8bc70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x10aa8b490>
+           └ <json.decoder.JSONDecoder object at 0x10a45fee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x10a468860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x10aa8b520>
+               └ <json.decoder.JSONDecoder object at 0x10a45fee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:42:38 | ERROR    | ReqID:no-request-id | xmi_logger.xmi_logger:exception_handler:311 - 未处理的异常: AttributeError: 'Logger' object has no attribute 'get_stats'
+NoneType: None
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 这是一条错误日志
+2025-04-21 21:43:38 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 这是一条严重错误日志
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 分类: api - API请求失败
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:466 - 发生异常: 除零错误 [ZeroDivisionError]: division by zero
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10718f250>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10718f1c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | __main__:<module>:84 - 捕获到除零错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10718f250>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10718f1c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x1071c1000>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10718f370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x106887c70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x106887490>
+           └ <json.decoder.JSONDecoder object at 0x10625bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x106264860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x106887520>
+               └ <json.decoder.JSONDecoder object at 0x10625bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | __main__:<module>:89 - 捕获到JSON解析错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x1071c1000>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10718f370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x106887c70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x106887490>
+           └ <json.decoder.JSONDecoder object at 0x10625bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x106264860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x106887520>
+               └ <json.decoder.JSONDecoder object at 0x10625bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:43:41 | ERROR    | ReqID:no-request-id | xmi_logger.xmi_logger:exception_handler:311 - 未处理的异常: AttributeError: 'Logger' object has no attribute 'get_stats'
+NoneType: None
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 这是一条错误日志
+2025-04-21 21:46:40 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 这是一条严重错误日志
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 分类: api - API请求失败
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:466 - 发生异常: 除零错误 [ZeroDivisionError]: division by zero
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10ce17250>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10ce171c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | __main__:<module>:84 - 捕获到除零错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10ce17250>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10ce171c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x10ce45090>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10ce172e0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x10c51bc70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x10c51b490>
+           └ <json.decoder.JSONDecoder object at 0x10beefeb0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x10c4f8860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x10c51b520>
+               └ <json.decoder.JSONDecoder object at 0x10beefeb0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | __main__:<module>:89 - 捕获到JSON解析错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x10ce45090>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10ce172e0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x10c51bc70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x10c51b490>
+           └ <json.decoder.JSONDecoder object at 0x10beefeb0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x10c4f8860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x10c51b520>
+               └ <json.decoder.JSONDecoder object at 0x10beefeb0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

@@ -1,0 +1,710 @@
+2025-04-21 21:37:14 | DEBUG    | ReqID:no-request-id | xmi_logger.my_logger:add_custom_level:343 - 81639 - Custom log level 'IMPORTANT' added.
+2025-04-21 21:37:14 | INFO     | ReqID:REQ-12345 | __main__:<module>:62 - 81639 - 这是一条信息日志
+2025-04-21 21:37:14 | DEBUG    | ReqID:REQ-12345 | __main__:<module>:63 - 81639 - 这是一条调试日志
+2025-04-21 21:37:14 | WARNING  | ReqID:REQ-12345 | __main__:<module>:64 - 81639 - 这是一条警告日志
+2025-04-21 21:37:14 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 81639 - 这是一条错误日志
+2025-04-21 21:37:14 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 81639 - 这是一条严重错误日志
+2025-04-21 21:37:14 | IMPORTANT | ReqID:REQ-12345 | __main__:<module>:69 - 81639 - 这是一条重要日志消息
+2025-04-21 21:37:14 | INFO     | ReqID:no-request-id | __main__:<module>:119 - 81639 - 测试完成
+2025-04-21 21:37:44 | DEBUG    | ReqID:no-request-id | xmi_logger.my_logger:add_custom_level:343 - 81934 - Custom log level 'IMPORTANT' added.
+2025-04-21 21:37:44 | INFO     | ReqID:REQ-12345 | __main__:<module>:62 - 81934 - 这是一条信息日志
+2025-04-21 21:37:44 | DEBUG    | ReqID:REQ-12345 | __main__:<module>:63 - 81934 - 这是一条调试日志
+2025-04-21 21:37:44 | WARNING  | ReqID:REQ-12345 | __main__:<module>:64 - 81934 - 这是一条警告日志
+2025-04-21 21:37:44 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 81934 - 这是一条错误日志
+2025-04-21 21:37:44 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 81934 - 这是一条严重错误日志
+2025-04-21 21:37:44 | IMPORTANT | ReqID:REQ-12345 | __main__:<module>:69 - 81934 - 这是一条重要日志消息
+2025-04-21 21:37:44 | INFO     | ReqID:no-request-id | __main__:<module>:119 - 81934 - 测试完成
+2025-04-21 21:39:43 | DEBUG    | ReqID:no-request-id | xmi_logger.my_logger:add_custom_level:381 - 83176 - Custom log level 'IMPORTANT' added.
+2025-04-21 21:39:43 | INFO     | ReqID:REQ-12345 | __main__:<module>:62 - 83176 - 这是一条信息日志
+2025-04-21 21:39:43 | DEBUG    | ReqID:REQ-12345 | __main__:<module>:63 - 83176 - 这是一条调试日志
+2025-04-21 21:39:43 | WARNING  | ReqID:REQ-12345 | __main__:<module>:64 - 83176 - 这是一条警告日志
+2025-04-21 21:39:43 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 83176 - 这是一条错误日志
+2025-04-21 21:39:43 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 83176 - 这是一条严重错误日志
+2025-04-21 21:39:43 | IMPORTANT | ReqID:REQ-12345 | __main__:<module>:69 - 83176 - 这是一条重要日志消息
+2025-04-21 21:39:43 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:log_with_tag:284 - 83176 - [FEATURE] 这是带标签的日志
+2025-04-21 21:39:43 | WARNING  | ReqID:REQ-12345 | xmi_logger.my_logger:log_with_tag:284 - 83176 - [DEPRECATED] 这是带标签的警告
+2025-04-21 21:39:43 | INFO     | ReqID:no-request-id | __main__:<module>:119 - 83176 - 测试完成
+2025-04-21 21:39:43 | ERROR    | ReqID:no-request-id | xmi_logger.my_logger:exception_handler:298 - 83176 - 未处理的异常: AttributeError: 'Logger' object has no attribute 'log_with_category'
+NoneType: None
+2025-04-21 21:40:49 | DEBUG    | ReqID:no-request-id | xmi_logger.my_logger:add_custom_level:394 - 84010 - Custom log level 'IMPORTANT' added.
+2025-04-21 21:40:49 | INFO     | ReqID:REQ-12345 | __main__:<module>:62 - 84010 - 这是一条信息日志
+2025-04-21 21:40:49 | DEBUG    | ReqID:REQ-12345 | __main__:<module>:63 - 84010 - 这是一条调试日志
+2025-04-21 21:40:49 | WARNING  | ReqID:REQ-12345 | __main__:<module>:64 - 84010 - 这是一条警告日志
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 84010 - 这是一条错误日志
+2025-04-21 21:40:49 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 84010 - 这是一条严重错误日志
+2025-04-21 21:40:49 | IMPORTANT | ReqID:REQ-12345 | __main__:<module>:69 - 84010 - 这是一条重要日志消息
+2025-04-21 21:40:49 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:log_with_tag:284 - 84010 - [FEATURE] 这是带标签的日志
+2025-04-21 21:40:49 | WARNING  | ReqID:REQ-12345 | xmi_logger.my_logger:log_with_tag:284 - 84010 - [DEPRECATED] 这是带标签的警告
+2025-04-21 21:40:49 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:log_with_category:297 - 84010 - 分类: db - 数据库连接成功
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | xmi_logger.my_logger:log_with_category:297 - 84010 - 分类: api - API请求失败
+2025-04-21 21:40:49 | DEBUG    | ReqID:REQ-12345 | xmi_logger.my_logger:log_with_category:297 - 84010 - 分类: ui - UI组件渲染
+2025-04-21 21:40:49 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:487 - 84010 - 开始函数调用
+2025-04-21 21:40:49 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:488 - 84010 - 调用函数: test_zero_division_error，参数: (1, 0)，关键字参数: {}
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | xmi_logger.my_logger:_log_exception:466 - 84010 - 发生异常: 除零错误 [ZeroDivisionError]: division by zero
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | xmi_logger.my_logger:_log_exception:468 - 84010 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x103d5f250>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/my_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x103d5f1c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:40:49 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_exception:475 - 84010 - 结束函数调用
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | __main__:<module>:84 - 84010 - 捕获到除零错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x103d5f250>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/my_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x103d5f1c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:40:49 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:487 - 84010 - 开始函数调用
+2025-04-21 21:40:49 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:488 - 84010 - 调用函数: test_error，参数: ()，关键字参数: {}
+2025-04-21 21:40:49 | WARNING  | ReqID:REQ-12345 | xmi_logger.my_logger:_log_exception:466 - 84010 - 发生异常: JSON解析错误 [JSONDecodeError]: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | xmi_logger.my_logger:_log_exception:468 - 84010 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x103d8d000>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/my_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x103d5f370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x103453c70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x103453490>
+           └ <json.decoder.JSONDecoder object at 0x102e2bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x103434860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x103453520>
+               └ <json.decoder.JSONDecoder object at 0x102e2bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:40:49 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_exception:475 - 84010 - 结束函数调用
+2025-04-21 21:40:49 | ERROR    | ReqID:REQ-12345 | __main__:<module>:89 - 84010 - 捕获到JSON解析错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x103d8d000>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/my_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x103d5f370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x103453c70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x103453490>
+           └ <json.decoder.JSONDecoder object at 0x102e2bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x103434860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x103453520>
+               └ <json.decoder.JSONDecoder object at 0x102e2bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:40:49 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:487 - 84010 - 开始函数调用
+2025-04-21 21:40:49 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:488 - 84010 - 调用函数: compute_something_sync，参数: ()，关键字参数: {}
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:502 - 84010 - 函数 compute_something_sync 返回结果: 同步计算完成，耗时: 1.004652秒
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:505 - 84010 - 结束函数调用
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | __main__:<module>:93 - 84010 - 同步计算结果: 同步计算完成
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:487 - 84010 - 开始函数调用
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:488 - 84010 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:502 - 84010 - 函数 generate_random_number 返回结果: 377，耗时: 0.000026秒
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:505 - 84010 - 结束函数调用
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 84010 - 生成的随机数: 377
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:487 - 84010 - 开始函数调用
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:488 - 84010 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:502 - 84010 - 函数 generate_random_number 返回结果: 398，耗时: 0.000004秒
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:505 - 84010 - 结束函数调用
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 84010 - 生成的随机数: 398
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:487 - 84010 - 开始函数调用
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:488 - 84010 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:502 - 84010 - 函数 generate_random_number 返回结果: 375，耗时: 0.000004秒
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:505 - 84010 - 结束函数调用
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 84010 - 生成的随机数: 375
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:482 - 84010 - 开始异步函数调用
+2025-04-21 21:40:50 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:483 - 84010 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:40:51 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:497 - 84010 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.000201秒
+2025-04-21 21:40:51 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:500 - 84010 - 结束异步函数调用
+2025-04-21 21:40:51 | INFO     | ReqID:REQ-12345 | __main__:main:104 - 84010 - 异步计算结果: 异步计算完成
+2025-04-21 21:40:51 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:482 - 84010 - 开始异步函数调用
+2025-04-21 21:40:51 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:483 - 84010 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:40:51 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:482 - 84010 - 开始异步函数调用
+2025-04-21 21:40:51 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:483 - 84010 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:40:51 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:482 - 84010 - 开始异步函数调用
+2025-04-21 21:40:51 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_start:483 - 84010 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:40:52 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:497 - 84010 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.000763秒
+2025-04-21 21:40:52 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:500 - 84010 - 结束异步函数调用
+2025-04-21 21:40:52 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:497 - 84010 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.001117秒
+2025-04-21 21:40:52 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:500 - 84010 - 结束异步函数调用
+2025-04-21 21:40:52 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:497 - 84010 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.002523秒
+2025-04-21 21:40:52 | INFO     | ReqID:REQ-12345 | xmi_logger.my_logger:_log_end:500 - 84010 - 结束异步函数调用
+2025-04-21 21:40:52 | INFO     | ReqID:REQ-12345 | __main__:main:109 - 84010 - 多任务异步结果: ['异步计算完成', '异步计算完成', '异步计算完成']
+2025-04-21 21:40:52 | INFO     | ReqID:no-request-id | __main__:<module>:119 - 84010 - 测试完成
+2025-04-21 21:40:52 | ERROR    | ReqID:no-request-id | xmi_logger.my_logger:exception_handler:311 - 84010 - 未处理的异常: AttributeError: 'Logger' object has no attribute 'get_stats'
+NoneType: None
+2025-04-21 21:42:35 | DEBUG    | ReqID:no-request-id | xmi_logger.xmi_logger:add_custom_level:394 - 85273 - Custom log level 'IMPORTANT' added.
+2025-04-21 21:42:35 | INFO     | ReqID:REQ-12345 | __main__:<module>:62 - 85273 - 这是一条信息日志
+2025-04-21 21:42:35 | DEBUG    | ReqID:REQ-12345 | __main__:<module>:63 - 85273 - 这是一条调试日志
+2025-04-21 21:42:35 | WARNING  | ReqID:REQ-12345 | __main__:<module>:64 - 85273 - 这是一条警告日志
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 85273 - 这是一条错误日志
+2025-04-21 21:42:35 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 85273 - 这是一条严重错误日志
+2025-04-21 21:42:35 | IMPORTANT | ReqID:REQ-12345 | __main__:<module>:69 - 85273 - 这是一条重要日志消息
+2025-04-21 21:42:35 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_tag:284 - 85273 - [FEATURE] 这是带标签的日志
+2025-04-21 21:42:35 | WARNING  | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_tag:284 - 85273 - [DEPRECATED] 这是带标签的警告
+2025-04-21 21:42:35 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 85273 - 分类: db - 数据库连接成功
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 85273 - 分类: api - API请求失败
+2025-04-21 21:42:35 | DEBUG    | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 85273 - 分类: ui - UI组件渲染
+2025-04-21 21:42:35 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 85273 - 开始函数调用
+2025-04-21 21:42:35 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 85273 - 调用函数: test_zero_division_error，参数: (1, 0)，关键字参数: {}
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:466 - 85273 - 发生异常: 除零错误 [ZeroDivisionError]: division by zero
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 85273 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10b397250>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10b3971c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:42:35 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:475 - 85273 - 结束函数调用
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | __main__:<module>:84 - 85273 - 捕获到除零错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10b397250>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10b3971c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:42:35 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 85273 - 开始函数调用
+2025-04-21 21:42:35 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 85273 - 调用函数: test_error，参数: ()，关键字参数: {}
+2025-04-21 21:42:35 | WARNING  | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:466 - 85273 - 发生异常: JSON解析错误 [JSONDecodeError]: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 85273 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x10b3c5000>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10b397370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x10aa8bc70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x10aa8b490>
+           └ <json.decoder.JSONDecoder object at 0x10a45fee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x10a468860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x10aa8b520>
+               └ <json.decoder.JSONDecoder object at 0x10a45fee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:42:35 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:475 - 85273 - 结束函数调用
+2025-04-21 21:42:35 | ERROR    | ReqID:REQ-12345 | __main__:<module>:89 - 85273 - 捕获到JSON解析错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x10b3c5000>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10b397370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x10aa8bc70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x10aa8b490>
+           └ <json.decoder.JSONDecoder object at 0x10a45fee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x10a468860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x10aa8b520>
+               └ <json.decoder.JSONDecoder object at 0x10a45fee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:42:35 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 85273 - 开始函数调用
+2025-04-21 21:42:35 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 85273 - 调用函数: compute_something_sync，参数: ()，关键字参数: {}
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 85273 - 函数 compute_something_sync 返回结果: 同步计算完成，耗时: 1.009523秒
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 85273 - 结束函数调用
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | __main__:<module>:93 - 85273 - 同步计算结果: 同步计算完成
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 85273 - 开始函数调用
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 85273 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 85273 - 函数 generate_random_number 返回结果: 455，耗时: 0.000051秒
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 85273 - 结束函数调用
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 85273 - 生成的随机数: 455
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 85273 - 开始函数调用
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 85273 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 85273 - 函数 generate_random_number 返回结果: 448，耗时: 0.000012秒
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 85273 - 结束函数调用
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 85273 - 生成的随机数: 448
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 85273 - 开始函数调用
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 85273 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 85273 - 函数 generate_random_number 返回结果: 291，耗时: 0.000006秒
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 85273 - 结束函数调用
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 85273 - 生成的随机数: 291
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 85273 - 开始异步函数调用
+2025-04-21 21:42:36 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 85273 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:42:37 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 85273 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.001084秒
+2025-04-21 21:42:37 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 85273 - 结束异步函数调用
+2025-04-21 21:42:37 | INFO     | ReqID:REQ-12345 | __main__:main:104 - 85273 - 异步计算结果: 异步计算完成
+2025-04-21 21:42:37 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 85273 - 开始异步函数调用
+2025-04-21 21:42:37 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 85273 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:42:37 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 85273 - 开始异步函数调用
+2025-04-21 21:42:37 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 85273 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:42:37 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 85273 - 开始异步函数调用
+2025-04-21 21:42:37 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 85273 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:42:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 85273 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.000238秒
+2025-04-21 21:42:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 85273 - 结束异步函数调用
+2025-04-21 21:42:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 85273 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.000934秒
+2025-04-21 21:42:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 85273 - 结束异步函数调用
+2025-04-21 21:42:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 85273 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.001061秒
+2025-04-21 21:42:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 85273 - 结束异步函数调用
+2025-04-21 21:42:38 | INFO     | ReqID:REQ-12345 | __main__:main:109 - 85273 - 多任务异步结果: ['异步计算完成', '异步计算完成', '异步计算完成']
+2025-04-21 21:42:38 | INFO     | ReqID:no-request-id | __main__:<module>:119 - 85273 - 测试完成
+2025-04-21 21:42:38 | ERROR    | ReqID:no-request-id | xmi_logger.xmi_logger:exception_handler:311 - 85273 - 未处理的异常: AttributeError: 'Logger' object has no attribute 'get_stats'
+NoneType: None
+2025-04-21 21:43:38 | DEBUG    | ReqID:no-request-id | xmi_logger.xmi_logger:add_custom_level:394 - 86144 - Custom log level 'IMPORTANT' added.
+2025-04-21 21:43:38 | INFO     | ReqID:REQ-12345 | __main__:<module>:62 - 86144 - 这是一条信息日志
+2025-04-21 21:43:38 | DEBUG    | ReqID:REQ-12345 | __main__:<module>:63 - 86144 - 这是一条调试日志
+2025-04-21 21:43:38 | WARNING  | ReqID:REQ-12345 | __main__:<module>:64 - 86144 - 这是一条警告日志
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 86144 - 这是一条错误日志
+2025-04-21 21:43:38 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 86144 - 这是一条严重错误日志
+2025-04-21 21:43:38 | IMPORTANT | ReqID:REQ-12345 | __main__:<module>:69 - 86144 - 这是一条重要日志消息
+2025-04-21 21:43:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_tag:284 - 86144 - [FEATURE] 这是带标签的日志
+2025-04-21 21:43:38 | WARNING  | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_tag:284 - 86144 - [DEPRECATED] 这是带标签的警告
+2025-04-21 21:43:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 86144 - 分类: db - 数据库连接成功
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 86144 - 分类: api - API请求失败
+2025-04-21 21:43:38 | DEBUG    | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 86144 - 分类: ui - UI组件渲染
+2025-04-21 21:43:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 86144 - 开始函数调用
+2025-04-21 21:43:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 86144 - 调用函数: test_zero_division_error，参数: (1, 0)，关键字参数: {}
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:466 - 86144 - 发生异常: 除零错误 [ZeroDivisionError]: division by zero
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 86144 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10718f250>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10718f1c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:43:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:475 - 86144 - 结束函数调用
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | __main__:<module>:84 - 86144 - 捕获到除零错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10718f250>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10718f1c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:43:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 86144 - 开始函数调用
+2025-04-21 21:43:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 86144 - 调用函数: test_error，参数: ()，关键字参数: {}
+2025-04-21 21:43:38 | WARNING  | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:466 - 86144 - 发生异常: JSON解析错误 [JSONDecodeError]: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 86144 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x1071c1000>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10718f370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x106887c70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x106887490>
+           └ <json.decoder.JSONDecoder object at 0x10625bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x106264860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x106887520>
+               └ <json.decoder.JSONDecoder object at 0x10625bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:43:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:475 - 86144 - 结束函数调用
+2025-04-21 21:43:38 | ERROR    | ReqID:REQ-12345 | __main__:<module>:89 - 86144 - 捕获到JSON解析错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x1071c1000>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10718f370>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x106887c70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x106887490>
+           └ <json.decoder.JSONDecoder object at 0x10625bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x106264860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x106887520>
+               └ <json.decoder.JSONDecoder object at 0x10625bee0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:43:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 86144 - 开始函数调用
+2025-04-21 21:43:38 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 86144 - 调用函数: compute_something_sync，参数: ()，关键字参数: {}
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 86144 - 函数 compute_something_sync 返回结果: 同步计算完成，耗时: 1.001738秒
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 86144 - 结束函数调用
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | __main__:<module>:93 - 86144 - 同步计算结果: 同步计算完成
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 86144 - 开始函数调用
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 86144 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 86144 - 函数 generate_random_number 返回结果: 385，耗时: 0.000063秒
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 86144 - 结束函数调用
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 86144 - 生成的随机数: 385
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 86144 - 开始函数调用
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 86144 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 86144 - 函数 generate_random_number 返回结果: 187，耗时: 0.000009秒
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 86144 - 结束函数调用
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 86144 - 生成的随机数: 187
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 86144 - 开始函数调用
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 86144 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 86144 - 函数 generate_random_number 返回结果: 199，耗时: 0.000009秒
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 86144 - 结束函数调用
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 86144 - 生成的随机数: 199
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 86144 - 开始异步函数调用
+2025-04-21 21:43:39 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 86144 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:43:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 86144 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.000269秒
+2025-04-21 21:43:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 86144 - 结束异步函数调用
+2025-04-21 21:43:40 | INFO     | ReqID:REQ-12345 | __main__:main:104 - 86144 - 异步计算结果: 异步计算完成
+2025-04-21 21:43:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 86144 - 开始异步函数调用
+2025-04-21 21:43:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 86144 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:43:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 86144 - 开始异步函数调用
+2025-04-21 21:43:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 86144 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:43:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 86144 - 开始异步函数调用
+2025-04-21 21:43:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 86144 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:43:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 86144 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.000392秒
+2025-04-21 21:43:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 86144 - 结束异步函数调用
+2025-04-21 21:43:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 86144 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.001401秒
+2025-04-21 21:43:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 86144 - 结束异步函数调用
+2025-04-21 21:43:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 86144 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.001432秒
+2025-04-21 21:43:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 86144 - 结束异步函数调用
+2025-04-21 21:43:41 | INFO     | ReqID:REQ-12345 | __main__:main:109 - 86144 - 多任务异步结果: ['异步计算完成', '异步计算完成', '异步计算完成']
+2025-04-21 21:43:41 | INFO     | ReqID:no-request-id | __main__:<module>:119 - 86144 - 测试完成
+2025-04-21 21:43:41 | ERROR    | ReqID:no-request-id | xmi_logger.xmi_logger:exception_handler:311 - 86144 - 未处理的异常: AttributeError: 'Logger' object has no attribute 'get_stats'
+NoneType: None
+2025-04-21 21:46:40 | DEBUG    | ReqID:no-request-id | xmi_logger.xmi_logger:add_custom_level:394 - 87665 - Custom log level 'IMPORTANT' added.
+2025-04-21 21:46:40 | INFO     | ReqID:REQ-12345 | __main__:<module>:62 - 87665 - 这是一条信息日志
+2025-04-21 21:46:40 | DEBUG    | ReqID:REQ-12345 | __main__:<module>:63 - 87665 - 这是一条调试日志
+2025-04-21 21:46:40 | WARNING  | ReqID:REQ-12345 | __main__:<module>:64 - 87665 - 这是一条警告日志
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | __main__:<module>:65 - 87665 - 这是一条错误日志
+2025-04-21 21:46:40 | CRITICAL | ReqID:REQ-12345 | __main__:<module>:66 - 87665 - 这是一条严重错误日志
+2025-04-21 21:46:40 | IMPORTANT | ReqID:REQ-12345 | __main__:<module>:69 - 87665 - 这是一条重要日志消息
+2025-04-21 21:46:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_tag:284 - 87665 - [FEATURE] 这是带标签的日志
+2025-04-21 21:46:40 | WARNING  | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_tag:284 - 87665 - [DEPRECATED] 这是带标签的警告
+2025-04-21 21:46:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 87665 - 分类: db - 数据库连接成功
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 87665 - 分类: api - API请求失败
+2025-04-21 21:46:40 | DEBUG    | ReqID:REQ-12345 | xmi_logger.xmi_logger:log_with_category:297 - 87665 - 分类: ui - UI组件渲染
+2025-04-21 21:46:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 87665 - 开始函数调用
+2025-04-21 21:46:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 87665 - 调用函数: test_zero_division_error，参数: (1, 0)，关键字参数: {}
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:466 - 87665 - 发生异常: 除零错误 [ZeroDivisionError]: division by zero
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 87665 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10ce17250>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10ce171c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:46:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:475 - 87665 - 结束函数调用
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | __main__:<module>:84 - 87665 - 捕获到除零错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 82, in <module>
+    result = test_zero_division_error(1, 0)
+             └ <function test_zero_division_error at 0x10ce17250>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ (1, 0)
+             └ <function test_zero_division_error at 0x10ce171c0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 37, in test_zero_division_error
+    return a / b
+           │   └ 0
+           └ 1
+
+ZeroDivisionError: division by zero
+2025-04-21 21:46:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 87665 - 开始函数调用
+2025-04-21 21:46:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 87665 - 调用函数: test_error，参数: ()，关键字参数: {}
+2025-04-21 21:46:40 | WARNING  | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:466 - 87665 - 发生异常: JSON解析错误 [JSONDecodeError]: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:468 - 87665 - 异常堆栈:
+Traceback (most recent call last):
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x10ce45090>
+
+> File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10ce172e0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x10c51bc70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x10c51b490>
+           └ <json.decoder.JSONDecoder object at 0x10beefeb0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x10c4f8860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x10c51b520>
+               └ <json.decoder.JSONDecoder object at 0x10beefeb0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:46:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_exception:475 - 87665 - 结束函数调用
+2025-04-21 21:46:40 | ERROR    | ReqID:REQ-12345 | __main__:<module>:89 - 87665 - 捕获到JSON解析错误
+Traceback (most recent call last):
+
+> File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 87, in <module>
+    result = test_error()
+             └ <function test_error at 0x10ce45090>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/site-packages/xmi_logger/xmi_logger.py", line 443, in sync_wrapper
+    result = func(*args, **kwargs)
+             │     │       └ {}
+             │     └ ()
+             └ <function test_error at 0x10ce172e0>
+
+  File "/Users/an/wangzhib_githubs/xmi_logger/example/main.py", line 41, in test_error
+    json.loads("invalid_json")
+    │    └ <function loads at 0x10c51bc70>
+    └ <module 'json' from '/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py'>
+
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           │                │      └ 'invalid_json'
+           │                └ <function JSONDecoder.decode at 0x10c51b490>
+           └ <json.decoder.JSONDecoder object at 0x10beefeb0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               │    │          │      │  └ 'invalid_json'
+               │    │          │      └ <built-in method match of re.Pattern object at 0x10c4f8860>
+               │    │          └ 'invalid_json'
+               │    └ <function JSONDecoder.raw_decode at 0x10c51b520>
+               └ <json.decoder.JSONDecoder object at 0x10beefeb0>
+  File "/Users/an/.pyenv/versions/3.10.10/lib/python3.10/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+          │                                  └ 'invalid_json'
+          └ <class 'json.decoder.JSONDecodeError'>
+
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-04-21 21:46:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 87665 - 开始函数调用
+2025-04-21 21:46:40 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 87665 - 调用函数: compute_something_sync，参数: ()，关键字参数: {}
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 87665 - 函数 compute_something_sync 返回结果: 同步计算完成，耗时: 1.004231秒
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 87665 - 结束函数调用
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | __main__:<module>:93 - 87665 - 同步计算结果: 同步计算完成
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 87665 - 开始函数调用
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 87665 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 87665 - 函数 generate_random_number 返回结果: 116，耗时: 0.000033秒
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 87665 - 结束函数调用
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 87665 - 生成的随机数: 116
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 87665 - 开始函数调用
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 87665 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 87665 - 函数 generate_random_number 返回结果: 6，耗时: 0.000007秒
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 87665 - 结束函数调用
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 87665 - 生成的随机数: 6
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:487 - 87665 - 开始函数调用
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:488 - 87665 - 调用函数: generate_random_number，参数: (1, 1000)，关键字参数: {}
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:502 - 87665 - 函数 generate_random_number 返回结果: 557，耗时: 0.000014秒
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:505 - 87665 - 结束函数调用
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | __main__:<module>:98 - 87665 - 生成的随机数: 557
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 87665 - 开始异步函数调用
+2025-04-21 21:46:41 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 87665 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:46:42 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 87665 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.000945秒
+2025-04-21 21:46:42 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 87665 - 结束异步函数调用
+2025-04-21 21:46:42 | INFO     | ReqID:REQ-12345 | __main__:main:104 - 87665 - 异步计算结果: 异步计算完成
+2025-04-21 21:46:42 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 87665 - 开始异步函数调用
+2025-04-21 21:46:42 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 87665 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:46:42 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 87665 - 开始异步函数调用
+2025-04-21 21:46:42 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 87665 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:46:42 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:482 - 87665 - 开始异步函数调用
+2025-04-21 21:46:42 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_start:483 - 87665 - 调用异步函数: compute_something_async，参数: ()，关键字参数: {}
+2025-04-21 21:46:43 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 87665 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.001295秒
+2025-04-21 21:46:43 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 87665 - 结束异步函数调用
+2025-04-21 21:46:43 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 87665 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.002984秒
+2025-04-21 21:46:43 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 87665 - 结束异步函数调用
+2025-04-21 21:46:43 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:497 - 87665 - 异步函数 compute_something_async 返回结果: 异步计算完成，耗时: 1.004693秒
+2025-04-21 21:46:43 | INFO     | ReqID:REQ-12345 | xmi_logger.xmi_logger:_log_end:500 - 87665 - 结束异步函数调用
+2025-04-21 21:46:43 | INFO     | ReqID:REQ-12345 | __main__:main:109 - 87665 - 多任务异步结果: ['异步计算完成', '异步计算完成', '异步计算完成']
+2025-04-21 21:46:43 | INFO     | ReqID:no-request-id | __main__:<module>:119 - 87665 - 测试完成
