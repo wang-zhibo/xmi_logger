@@ -90,7 +90,6 @@ class XmiLogger:
         custom_format: Optional[str] = None,  # 新增：自定义日志格式
         filter_level: str = "DEBUG",  # 新增：日志过滤级别
         compression: str = "zip",   # 新增：压缩格式，支持 zip, gz, tar
-        file_pattern: str = "{time:YYYY-MM-DD}",  # 新增：文件命名模式
         enable_stats: bool = False,  # 新增：是否启用日志统计
         categories: Optional[list] = None,  # 新增：日志分类列表
     ) -> None:
@@ -118,7 +117,6 @@ class XmiLogger:
         self.custom_format = custom_format
         self.filter_level = filter_level
         self.compression = compression
-        self.file_pattern = file_pattern
         self.enable_stats = enable_stats
         self.categories = categories or []
 
@@ -226,7 +224,7 @@ class XmiLogger:
 
         # 添加主日志文件
         self.logger.add(
-            os.path.join(self.log_dir, f"{self.file_name}_{self.file_pattern}.log"),
+            os.path.join(self.log_dir, f"{self.file_name}.log"),
             format=log_format,
             level=self.filter_level,
             rotation=rotation,
