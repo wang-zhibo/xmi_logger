@@ -1,4 +1,3 @@
-
 from xmi_logger import XmiLogger
 
 if __name__ == '__main__':
@@ -24,7 +23,6 @@ if __name__ == '__main__':
         custom_format=custom_format,     # 自定义格式
         filter_level="DEBUG",            # 日志级别
         compression="zip",               # 压缩格式
-        file_pattern="{time:YYYY-MM-DD}", # 文件命名模式
         enable_stats=True,               # 启用统计
         categories=["api", "db", "ui"]   # 日志分类
     )
@@ -111,7 +109,8 @@ if __name__ == '__main__':
         asyncio.run(main())
         
         # 输出日志统计
-        print("\n" + log.get_stats())
+        print("\n日志统计信息:")
+        print(json.dumps(log.get_stats(), indent=2, ensure_ascii=False))
 
     finally:
         # 重置请求ID
