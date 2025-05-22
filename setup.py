@@ -13,7 +13,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='xmi_logger',
-    version='0.0.2',
+    version='0.0.3',
     author='gm.zhibo.wang',
     author_email='gm.zhibo.wang@gmail.com',
     description='An enhanced logger based on Loguru',
@@ -29,7 +29,8 @@ setup(
     ],
     install_requires=[
         'loguru==0.7.3',
-        'requests'
+        'requests',
+        'aiohttp'
     ],
     project_urls={
         "Bug Reports": "https://github.com/wang-zhibo/xmi_logger/issues",
