@@ -173,6 +173,122 @@ print(report)
 logger.export_logs_to_json("logs.json", hours=24)
 ```
 
+### 智能分析功能
+
+```python
+from xmi_logger.advanced_features import *
+
+# 智能日志分析
+analyzer = LogAnalyzer()
+analysis = analyzer.analyze_log({
+    'message': '数据库连接失败: Connection refused',
+    'level': 'ERROR'
+})
+print(f"严重程度: {analysis['severity']}")  # high
+print(f"类别: {analysis['categories']}")    # ['error']
+print(f"建议: {analysis['suggestions']}")   # ['检查相关服务和依赖']
+
+# 分布式日志支持
+dist_logger = DistributedLogger("node-001")
+log_id = dist_logger.get_log_id()  # node-001_1640995200000_1
+logger.info(f"分布式日志消息 (ID: {log_id})")
+
+# 日志安全功能
+security = LogSecurity()
+original = "用户密码: 123456"
+sanitized = security.sanitize_message(original)
+print(sanitized)  # 用户密码=***
+
+# 性能监控
+monitor = PerformanceMonitor()
+monitor.record_log("INFO", 0.05)  # 记录处理时间
+metrics = monitor.get_metrics()
+print(f"总日志数: {metrics['log_count']}")
+print(f"平均处理时间: {metrics['avg_processing_time']:.2f}ms")
+
+# 日志聚合
+aggregator = LogAggregator(window_size=100, flush_interval=5.0)
+for i in range(20):
+    aggregator.add_log({
+        'level': 'INFO',
+        'message': '重复的日志消息',
+        'timestamp': time.time()
+    })
+# 自动聚合为: [聚合] 重复的日志消息 (重复 20 次)
+
+# 流处理
+processor = LogStreamProcessor()
+
+def add_timestamp(log_entry):
+    log_entry['processed_timestamp'] = time.time()
+    return log_entry
+
+def add_checksum(log_entry):
+    message = log_entry.get('message', '')
+    log_entry['checksum'] = hashlib.md5(message.encode()).hexdigest()[:8]
+    return log_entry
+
+processor.add_processor(add_timestamp)
+processor.add_processor(add_checksum)
+
+# 处理日志
+processor.process_log({'level': 'INFO', 'message': '测试消息'})
+processed_log = processor.get_processed_log()
+
+# 数据库支持
+db = LogDatabase("logs.db")
+db.insert_log({
+    'timestamp': datetime.now().isoformat(),
+    'level': 'ERROR',
+    'message': '数据库连接失败',
+    'file': 'app.py',
+    'line': 100,
+    'function': 'connect_db'
+})
+
+# 查询错误日志
+logs = db.query_logs({'level': 'ERROR'}, limit=10)
+
+# 健康检查
+checker = LogHealthChecker()
+health = checker.check_health("logs")
+print(f"状态: {health['status']}")  # healthy/warning/critical
+print(f"磁盘使用率: {health['disk_usage_percent']:.1f}%")
+
+# 备份管理
+backup_mgr = LogBackupManager("backups")
+backup_path = backup_mgr.create_backup("logs", "daily_backup")
+
+# 列出备份
+backups = backup_mgr.list_backups()
+for backup in backups:
+    print(f"{backup['name']} - {backup['size_mb']:.2f}MB")
+
+# 内存优化
+optimizer = MemoryOptimizer(max_memory_mb=512)
+if optimizer.check_memory():
+    optimizer.optimize_memory()  # 自动清理内存
+
+# 智能路由
+router = LogRouter()
+
+def error_handler(log_entry):
+    print(f"🚨 错误日志: {log_entry['message']}")
+
+def security_handler(log_entry):
+    print(f"🔒 安全日志: {log_entry['message']}")
+
+router.add_route(lambda entry: entry.get('level') == 'ERROR', error_handler)
+router.add_route(lambda entry: 'password' in entry.get('message', ''), security_handler)
+
+router.route_log({'level': 'ERROR', 'message': '系统错误'})
+
+# 日志归档
+archiver = LogArchiver("archives")
+archived_files = archiver.archive_logs("logs", days_old=7)
+print(f"归档了 {len(archived_files)} 个文件")
+```
+
 ### 远程日志收集
 
 ```python
@@ -296,6 +412,20 @@ logger = XmiLogger(
 - 日志管理压缩、归档、清理功能
 - 日志分析智能分析日志内容和趋势
 - 性能监控实时监控缓存和性能指标
+
+### 9. 智能分析功能
+- 智能日志分析自动识别错误、警告、安全事件
+- 分布式日志支持多节点环境，提供唯一日志ID
+- 日志安全功能敏感信息清理和加密
+- 性能监控实时监控系统资源使用
+- 日志聚合自动聚合重复日志
+- 流处理可扩展的日志处理管道
+- 数据库支持结构化日志存储和查询
+- 健康检查系统状态监控
+- 备份管理自动备份和恢复
+- 内存优化智能垃圾回收
+- 智能路由基于条件的日志分发
+- 日志归档自动压缩和归档
 
 ## 错误处理
 
