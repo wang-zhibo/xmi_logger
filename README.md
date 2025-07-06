@@ -12,6 +12,8 @@
 - 🔒 安全性：内置错误处理和配置验证
 - 📦 日志轮转：支持按大小和时间轮转
 - 🌍 远程日志：支持异步远程日志收集
+- 🐛 增强错误信息：显示详细的错误位置、调用链和代码行
+- ⚡ 性能优化：智能缓存、连接池、内存优化
 
 ## 安装
 
@@ -55,6 +57,120 @@ async def main():
     logger.info(f"异步函数结果: {result}")
 
 asyncio.run(main())
+```
+
+### 增强错误信息
+
+```python
+# 错误日志现在会显示详细的位置信息
+@logger.log_decorator("除零错误", level="ERROR")
+def divide_numbers(a, b):
+    return a / b
+
+try:
+    result = divide_numbers(1, 0)
+except ZeroDivisionError:
+    logger.exception("捕获到除零错误")
+    # 输出示例：
+    # 2025-01-03 10:30:15.123 | ERROR    | ReqID:REQ-123 | app.py:25:divide_numbers | 12345 | 除零错误 [ZeroDivisionError]: division by zero | 位置: app.py:25:divide_numbers | 代码: return a / b
+    # 调用链: app.py:25:divide_numbers -> main.py:10:main
+```
+
+### 带位置信息的日志
+
+```python
+# 使用 log_with_location 方法记录带位置信息的日志
+logger.log_with_location("INFO", "这是带位置信息的日志")
+# 输出示例：
+# 2025-01-03 10:30:15.123 | INFO     | ReqID:REQ-123 | app.py:30:main | 12345 | [app.py:30:main] 这是带位置信息的日志
+```
+
+### 性能监控
+
+```python
+# 获取性能统计信息
+perf_stats = logger.get_performance_stats()
+print(json.dumps(perf_stats, indent=2))
+
+# 清除缓存
+logger.clear_caches()
+
+# 性能优化配置
+logger = XmiLogger(
+    file_name="app",
+    cache_size=512,        # 增加缓存大小
+    enable_stats=True      # 启用统计功能
+)
+```
+
+### 批量日志处理
+
+```python
+# 批量记录日志
+batch_logs = [
+    {'level': 'INFO', 'message': '消息1', 'tag': 'BATCH'},
+    {'level': 'WARNING', 'message': '消息2', 'category': 'SYSTEM'},
+    {'level': 'ERROR', 'message': '消息3'}
+]
+
+logger.batch_log(batch_logs)  # 同步批量记录
+logger.async_batch_log(batch_logs)  # 异步批量记录
+```
+
+### 上下文日志
+
+```python
+# 带上下文的日志记录
+context = {
+    'user_id': 12345,
+    'session_id': 'sess_abc123',
+    'request_id': 'req_xyz789'
+}
+
+logger.log_with_context("INFO", "用户登录", context)
+logger.log_with_timing("INFO", "API请求完成", {'db_query': 0.125, 'total': 0.467})
+```
+
+### 自适应日志级别
+
+```python
+# 启用自适应级别
+logger = XmiLogger(
+    file_name="app",
+    adaptive_level=True,    # 启用自适应级别
+    performance_mode=True   # 启用性能模式
+)
+
+# 根据错误率自动调整级别
+logger.set_adaptive_level(error_rate_threshold=0.1)
+```
+
+### 日志管理
+
+```python
+# 压缩旧日志
+logger.compress_logs(days_old=7)
+
+# 归档日志
+logger.archive_logs()
+
+# 清理旧日志
+logger.cleanup_old_logs(max_days=30)
+```
+
+### 日志分析
+
+```python
+# 分析日志
+analysis = logger.analyze_logs(hours=24)
+print(f"错误率: {analysis['error_rate']:.2%}")
+
+# 生成报告
+report = logger.generate_log_report(hours=24)
+print(report)
+
+# 导出日志
+logger.export_logs_to_json("logs.json", hours=24)
 ```
 
 ### 远程日志收集
@@ -158,6 +274,28 @@ logger = XmiLogger(
 - 函数执行时间记录
 - 异常捕获和记录
 - 支持同步和异步函数
+
+### 6. 增强错误信息
+- 显示错误发生的具体文件、行号和函数名
+- 显示错误发生时的代码行内容
+- 显示调用链信息（最后3层调用）
+- 支持全局异常处理器
+- 提供带位置信息的日志记录方法
+
+### 7. 性能优化
+- 智能缓存机制减少重复计算
+- 连接池优化网络请求性能
+- 内存优化减少对象创建
+- 统计缓存提高查询效率
+- 线程本地缓存提升并发性能
+
+### 8. 高级功能
+- 批量日志处理提高大量日志记录性能
+- 上下文日志自动添加相关上下文信息
+- 自适应级别根据系统状态自动调整日志级别
+- 日志管理压缩、归档、清理功能
+- 日志分析智能分析日志内容和趋势
+- 性能监控实时监控缓存和性能指标
 
 ## 错误处理
 
