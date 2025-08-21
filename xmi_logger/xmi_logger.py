@@ -31,14 +31,14 @@ class XmiLogger:
     基于 Loguru 的增强日志记录器，具有以下功能：
     - 自定义日志格式
     - 日志轮转和保留策略
-    - 上下文信息管理（如 request_id）
-    - 远程日志收集（使用线程池防止阻塞）
+    - 上下文信息管理(如 request_id)
+    - 远程日志收集(使用线程池防止阻塞)
     - 装饰器用于记录函数调用和执行时间，支持同步/异步函数
-    - 自定义日志级别（避免与 Loguru 预定义的冲突）
+    - 自定义日志级别(避免与 Loguru 预定义的冲突)
     - 统一异常处理
 
     新增：
-    - 可指定语言（中文/英文），默认中文
+    - 可指定语言(中文/英文)，默认中文
     - 支持按时间轮转日志
     - 支持自定义日志格式
     - 支持日志级别过滤
@@ -86,35 +86,35 @@ class XmiLogger:
     _location_cache: Dict[str, str] = {}
     _stats_cache: Dict[str, Any] = {}
     _stats_cache_time = 0
-    _stats_cache_ttl = 5  # 统计缓存TTL（秒）
+    _stats_cache_ttl = 5  # 统计缓存TTL(秒)
 
     def __init__(
         self,
         file_name: str,
         log_dir: str = 'logs',
-        max_size: int = 14,        # 单位：MB
+        max_size: int = 14,                    # 单位：MB
         retention: str = '7 days',
         remote_log_url: Optional[str] = None,
         max_workers: int = 3,
         work_type: bool = False,
-        language: str = 'zh',      # 语言选项，默认为中文
-        rotation_time: Optional[str] = None,  # 新增：按时间轮转，如 "1 day", "1 week"
-        custom_format: Optional[str] = None,  # 新增：自定义日志格式
-        filter_level: str = "DEBUG",  # 新增：日志过滤级别
-        compression: str = "zip",   # 新增：压缩格式，支持 zip, gz, tar
-        enable_stats: bool = False,  # 新增：是否启用日志统计
-        categories: Optional[list] = None,  # 新增：日志分类列表
-        cache_size: int = 128,  # 新增：缓存大小配置
-        adaptive_level: bool = False,  # 新增：自适应日志级别
-        performance_mode: bool = False,  # 新增：性能模式
+        language: str = 'zh',                  # 语言选项，默认为中文
+        rotation_time: Optional[str] = None,   # 新增：按时间轮转，如 "1 day", "1 week"
+        custom_format: Optional[str] = None,   # 新增：自定义日志格式
+        filter_level: str = "DEBUG",           # 新增：日志过滤级别
+        compression: str = "zip",              # 新增：压缩格式，支持 zip, gz, tar
+        enable_stats: bool = False,            # 新增：是否启用日志统计
+        categories: Optional[list] = None,     # 新增：日志分类列表
+        cache_size: int = 128,                 # 新增：缓存大小配置
+        adaptive_level: bool = False,          # 新增：自适应日志级别
+        performance_mode: bool = False,        # 新增：性能模式
     ) -> None:
         """
         初始化日志记录器。
 
         Args:
-            file_name (str): 日志文件名称（主日志文件前缀）。
+            file_name (str): 日志文件名称(主日志文件前缀)。
             log_dir (str): 日志文件目录。
-            max_size (int): 日志文件大小（MB）超过时进行轮转。
+            max_size (int): 日志文件大小(MB)超过时进行轮转。
             retention (str): 日志保留策略。
             remote_log_url (str, optional): 远程日志收集的URL。如果提供，将启用远程日志收集。
             max_workers (int): 线程池的最大工作线程数。
@@ -257,7 +257,7 @@ class XmiLogger:
             # 添加文件处理器
             self._add_file_handlers(log_format)
             
-            # 配置远程日志（如果启用）
+            # 配置远程日志(如果启用)
             if self.remote_log_url:
                 self._configure_remote_logging()
             
@@ -422,7 +422,7 @@ class XmiLogger:
                 
                 # 获取错误发生的具体位置
                 if tb:
-                    # 获取最后一个调用帧（通常是错误发生的地方）
+                    # 获取最后一个调用帧(通常是错误发生的地方)
                     last_frame = tb[-1]
                     error_location = f"{last_frame.filename}:{last_frame.lineno}:{last_frame.name}"
                     line_content = last_frame.line.strip() if last_frame.line else "未知代码行"
@@ -612,9 +612,9 @@ class XmiLogger:
         增强版日志装饰器，支持自定义日志级别和跟踪配置
 
         Args:
-            msg (str): 支持多语言的异常提示信息key（使用_LANG_MAP中的键）
-            level (str): 记录异常的日志级别（默认ERROR）
-            trace (bool): 是否记录完整堆栈跟踪（默认True）
+            msg (str): 支持多语言的异常提示信息key(使用_LANG_MAP中的键)
+            level (str): 记录异常的日志级别(默认ERROR)
+            trace (bool): 是否记录完整堆栈跟踪(默认True)
         """
         def decorator(func):
             _msg_key = msg or 'UNHANDLED_EXCEPTION'
@@ -673,7 +673,7 @@ class XmiLogger:
             
             # 获取错误发生的具体位置
             if tb:
-                # 获取最后一个调用帧（通常是错误发生的地方）
+                # 获取最后一个调用帧(通常是错误发生的地方)
                 last_frame = tb[-1]
                 error_location = f"{last_frame.filename}:{last_frame.lineno}:{last_frame.name}"
                 line_content = last_frame.line.strip() if last_frame.line else "未知代码行"
