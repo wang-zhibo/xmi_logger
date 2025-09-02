@@ -7,19 +7,29 @@
 # Desc  :
 
 from setuptools import setup, find_packages
+from codecs import open
+import glob
+import sys
+import os
+
+
+about = {}
+here = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(here, "xmi_logger", "__version__.py"), "r", "utf-8") as f:
+    exec(f.read(), about)
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name='xmi_logger',
-    version='0.0.6',
-    author='gm.zhibo.wang',
-    author_email='gm.zhibo.wang@gmail.com',
-    description='An enhanced logger based on Loguru',
+    name=about["__title__"],
+    version=about["__version__"],
+    author=about["__author__"],
+    author_email=about["__author_email__"],
+    description=about["__description__"],
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/wang-zhibo/xmi_logger',
+    url=about["__url__"],
     packages=find_packages(),
     include_package_data=True,
     python_requires='>=3.6',
