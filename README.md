@@ -1,24 +1,21 @@
 # XmiLogger
 
-基于 Loguru 的增强日志记录器，支持多语言、异步操作和高级统计功能。
+基于 Loguru 的增强日志记录器，支持多语言、异步操作、远程错误上报、统计与日志管理等能力。
 
 ## 特性
 
-- 🚀 高性能：使用 LRU 缓存和异步处理
-- 🌐 多语言支持：支持中文和英文日志输出
-- 📊 高级统计：支持日志分类统计和趋势分析
-- 🔄 异步支持：支持异步函数日志记录
-- 📝 自定义格式：支持自定义日志格式
-- 🔒 安全性：内置错误处理和配置验证
-- 📦 日志轮转：支持按大小和时间轮转
-- 🌍 远程日志：支持异步远程日志收集
-- 🐛 增强错误信息：显示详细的错误位置、调用链和代码行
-- ⚡ 性能优化：智能缓存、连接池、内存优化
+- 多语言输出（zh/en）
+- 自定义格式、级别过滤、按大小或按时间轮转、保留策略、压缩
+- request_id 上下文注入（ContextVar）
+- 装饰器记录函数调用与耗时（同步/异步）
+- 远程日志上报（默认仅 ERROR 及以上，异步发送避免阻塞）
+- 基础统计（按级别/分类/小时）、缓存性能信息
+- 日志管理（压缩、归档、清理）、简单分析与导出
 
 ## 安装
 
 ```bash
-pip install xmi-logger
+pip install xmi_logger
 ```
 
 ## 快速开始
@@ -35,10 +32,67 @@ logger = XmiLogger(
     language="zh"  # 使用中文输出
 )
 
-# 记录不同级别的日志
-logger.info("这是一条信息日志")
-logger.warning("这是一条警告日志")
-logger.error("这是一条错误日志")
+# 设置 request_id（每条日志会带 ReqID:xxx）
+token = logger.request_id_var.set("req-001")
+try:
+    logger.info("这是一条信息日志")
+    logger.warning("这是一条警告日志")
+    logger.error("这是一条错误日志")
+finally:
+    logger.request_id_var.reset(token)
+
+# 程序退出前清理（关闭远程发送、恢复 excepthook、移除 handler）
+logger.cleanup()
+```
+
+#### request_id 用法与并发说明
+
+`request_id_var` 是一个 `ContextVar`，用来给“同一条业务链路”的日志自动带上 `ReqID:...`：
+
+- `set(value)`：把当前上下文的 request_id 设为 `value`，并返回一个 token（表示 set 之前的旧值）
+- `reset(token)`：把当前上下文恢复到 set 之前的值，避免 request_id 泄漏到下一次请求/任务
+
+推荐写法用 `try/finally` 确保一定 reset（如上例）。
+
+多并发下的行为：
+
+- 多线程：不同线程之间的 `request_id` 互不影响；但新线程不会自动继承父线程的 request_id，需要显式传递。
+- asyncio：不同 Task 之间的 `request_id` 互不影响；创建 Task 时会复制一份当前上下文，所以要在 `create_task()` 之前 set。
+
+线程/线程池中传递 request_id 的示例：
+
+```python
+import contextvars
+import threading
+
+token = logger.request_id_var.set("req-001")
+try:
+    ctx = contextvars.copy_context()
+    t = threading.Thread(target=lambda: ctx.run(logger.info, "子线程日志也带 ReqID"))
+    t.start()
+    t.join()
+finally:
+    logger.request_id_var.reset(token)
+```
+
+asyncio 并发示例（每个请求独立 request_id）：
+
+```python
+import asyncio
+
+async def handle(req_id: str):
+    token = logger.request_id_var.set(req_id)
+    try:
+        logger.info("开始处理")
+        await asyncio.sleep(0.1)
+        logger.info("处理完成")
+    finally:
+        logger.request_id_var.reset(token)
+
+async def main():
+    await asyncio.gather(handle("req-1"), handle("req-2"))
+
+asyncio.run(main())
 ```
 
 ### 异步函数支持
@@ -88,6 +142,8 @@ logger.log_with_location("INFO", "这是带位置信息的日志")
 ### 性能监控
 
 ```python
+import json
+
 # 获取性能统计信息
 perf_stats = logger.get_performance_stats()
 print(json.dumps(perf_stats, indent=2))
@@ -106,6 +162,8 @@ logger = XmiLogger(
 ### 批量日志处理
 
 ```python
+import asyncio
+
 # 批量记录日志
 batch_logs = [
     {'level': 'INFO', 'message': '消息1', 'tag': 'BATCH'},
@@ -114,7 +172,7 @@ batch_logs = [
 ]
 
 logger.batch_log(batch_logs)  # 同步批量记录
-logger.async_batch_log(batch_logs)  # 异步批量记录
+asyncio.run(logger.async_batch_log(batch_logs))  # 异步批量记录
 ```
 
 ### 上下文日志
@@ -138,10 +196,10 @@ logger.log_with_timing("INFO", "API请求完成", {'db_query': 0.125, 'total': 0
 logger = XmiLogger(
     file_name="app",
     adaptive_level=True,    # 启用自适应级别
-    performance_mode=True   # 启用性能模式
+    enable_stats=True       # 自适应依赖统计
 )
 
-# 根据错误率自动调整级别
+# 根据错误率/日志速率自动调整级别（需持续产生日志以更新统计）
 logger.set_adaptive_level(error_rate_threshold=0.1)
 ```
 
@@ -173,40 +231,65 @@ print(report)
 logger.export_logs_to_json("logs.json", hours=24)
 ```
 
-### 智能分析功能
+### advanced_features（可选）
+
+加密功能依赖 cryptography，性能监控的系统指标依赖 psutil：
+
+```bash
+pip install xmi_logger[advanced]
+```
 
 ```python
-from xmi_logger.advanced_features import *
+import hashlib
+import time
+from datetime import datetime
 
-# 智能日志分析
+from xmi_logger.advanced_features import (
+    DistributedLogger,
+    LogAggregator,
+    LogAnalyzer,
+    LogArchiver,
+    LogBackupManager,
+    LogDatabase,
+    LogHealthChecker,
+    LogSecurity,
+    LogStreamProcessor,
+    PerformanceMonitor,
+)
+
+# 智能日志分析（规则匹配）
 analyzer = LogAnalyzer()
 analysis = analyzer.analyze_log({
     'message': '数据库连接失败: Connection refused',
     'level': 'ERROR'
 })
-print(f"严重程度: {analysis['severity']}")  # high
-print(f"类别: {analysis['categories']}")    # ['error']
-print(f"建议: {analysis['suggestions']}")   # ['检查相关服务和依赖']
+print(f"严重程度: {analysis['severity']}")
+print(f"类别: {analysis['categories']}")
+print(f"建议: {analysis['suggestions']}")
 
-# 分布式日志支持
-dist_logger = DistributedLogger("node-001")
-log_id = dist_logger.get_log_id()  # node-001_1640995200000_1
+# 分布式日志 ID（跨进程重启也能递增）
+dist_logger = DistributedLogger("node-001", persist_every=100)
+log_id = dist_logger.get_log_id()
 logger.info(f"分布式日志消息 (ID: {log_id})")
 
-# 日志安全功能
+# 日志安全：脱敏（支持 password/token/api_key/密码/口令 等）
 security = LogSecurity()
-original = "用户密码: 123456"
+original = "用户密码: 123456, token=abcd"
 sanitized = security.sanitize_message(original)
-print(sanitized)  # 用户密码=***
+print(sanitized)
+
+payload = {"user": "alice", "password": "123456", "nested": {"api_key": "k-xxx"}}
+print(security.sanitize_mapping(payload))
 
 # 性能监控
 monitor = PerformanceMonitor()
-monitor.record_log("INFO", 0.05)  # 记录处理时间
+monitor.record_log("INFO", 0.05)
 metrics = monitor.get_metrics()
 print(f"总日志数: {metrics['log_count']}")
-print(f"平均处理时间: {metrics['avg_processing_time']:.2f}ms")
+print(f"平均处理时间: {metrics['avg_processing_time_ms']:.2f}ms")
+monitor.stop()
 
-# 日志聚合
+# 日志聚合（去重合并重复日志）
 aggregator = LogAggregator(window_size=100, flush_interval=5.0)
 for i in range(20):
     aggregator.add_log({
@@ -214,10 +297,12 @@ for i in range(20):
         'message': '重复的日志消息',
         'timestamp': time.time()
     })
-# 自动聚合为: [聚合] 重复的日志消息 (重复 20 次)
+aggregated = aggregator.flush()
+print(aggregated[0]["message"])
+aggregator.stop()
 
-# 流处理
-processor = LogStreamProcessor()
+# 流处理（管道式加工日志 entry）
+processor = LogStreamProcessor(max_queue_size=1000)
 
 def add_timestamp(log_entry):
     log_entry['processed_timestamp'] = time.time()
@@ -233,9 +318,10 @@ processor.add_processor(add_checksum)
 
 # 处理日志
 processor.process_log({'level': 'INFO', 'message': '测试消息'})
-processed_log = processor.get_processed_log()
+processed_log = processor.get_processed_log(timeout=1.0)
+processor.stop()
 
-# 数据库支持
+# SQLite 数据库存储（结构化落库 + 条件查询）
 db = LogDatabase("logs.db")
 db.insert_log({
     'timestamp': datetime.now().isoformat(),
@@ -248,14 +334,15 @@ db.insert_log({
 
 # 查询错误日志
 logs = db.query_logs({'level': 'ERROR'}, limit=10)
+db.close()
 
 # 健康检查
 checker = LogHealthChecker()
 health = checker.check_health("logs")
-print(f"状态: {health['status']}")  # healthy/warning/critical
+print(f"状态: {health['status']}")
 print(f"磁盘使用率: {health['disk_usage_percent']:.1f}%")
 
-# 备份管理
+# 安全备份/恢复（防止 tar 路径穿越）
 backup_mgr = LogBackupManager("backups")
 backup_path = backup_mgr.create_backup("logs", "daily_backup")
 
@@ -264,28 +351,9 @@ backups = backup_mgr.list_backups()
 for backup in backups:
     print(f"{backup['name']} - {backup['size_mb']:.2f}MB")
 
-# 内存优化
-optimizer = MemoryOptimizer(max_memory_mb=512)
-if optimizer.check_memory():
-    optimizer.optimize_memory()  # 自动清理内存
-
-# 智能路由
-router = LogRouter()
-
-def error_handler(log_entry):
-    print(f"🚨 错误日志: {log_entry['message']}")
-
-def security_handler(log_entry):
-    print(f"🔒 安全日志: {log_entry['message']}")
-
-router.add_route(lambda entry: entry.get('level') == 'ERROR', error_handler)
-router.add_route(lambda entry: 'password' in entry.get('message', ''), security_handler)
-
-router.route_log({'level': 'ERROR', 'message': '系统错误'})
-
-# 日志归档
+# 日志归档（压缩并移到 archives 目录）
 archiver = LogArchiver("archives")
-archived_files = archiver.archive_logs("logs", days_old=7)
+archived_files = archiver.archive_logs("logs", days_old=7, compression_type="gzip")
 print(f"归档了 {len(archived_files)} 个文件")
 ```
 
@@ -339,7 +407,10 @@ logger = XmiLogger(
     compression="zip",                  # 日志压缩格式
     enable_stats=False,                 # 是否启用统计
     categories=None,                    # 日志分类列表
-    cache_size=128                      # 缓存大小
+    cache_size=128,                     # 缓存大小
+    adaptive_level=False,               # 自适应日志级别
+    performance_mode=False,             # 性能模式（配合 enable_performance_mode/disable_performance_mode）
+    enable_exception_hook=False         # 是否接管 sys.excepthook
 )
 ```
 
@@ -450,4 +521,3 @@ except RuntimeError as e:
 ## 许可证
 
 MIT License
-

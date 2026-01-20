@@ -14,12 +14,12 @@ import requests
 import asyncio
 import aiohttp
 
-from typing import Optional, Dict, Any, Union, List, Tuple
+from typing import Optional, Dict, Any, List, Tuple
 
-from functools import wraps, lru_cache
+from functools import wraps
 from time import perf_counter
 from contextvars import ContextVar
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict
 from datetime import datetime, timedelta
 import threading
@@ -81,14 +81,6 @@ class XmiLogger:
         }
     }
 
-    # 添加类级别的缓存，使用 LRU 缓存提高性能
-    _format_cache: Dict[str, str] = {}
-    _message_cache: Dict[str, str] = {}
-    _location_cache: Dict[str, str] = {}
-    _stats_cache: Dict[str, Any] = {}
-    _stats_cache_time = 0
-    _stats_cache_ttl = 5  # 统计缓存TTL(秒)
-
     def __init__(
         self,
         file_name: str,
@@ -108,6 +100,7 @@ class XmiLogger:
         cache_size: int = 128,                 # 新增：缓存大小配置
         adaptive_level: bool = False,          # 新增：自适应日志级别
         performance_mode: bool = False,        # 新增：性能模式
+        enable_exception_hook: bool = False,
     ) -> None:
         """
         初始化日志记录器。
@@ -136,12 +129,23 @@ class XmiLogger:
         self.enable_stats = enable_stats
         self.categories = categories or []
         self._cache_size = cache_size
+        self._format_cache: Dict[Any, str] = {}
+        self._message_cache: Dict[Any, str] = {}
+        self._location_cache: Dict[Any, str] = {}
+        self._stats_cache: Dict[str, Any] = {}
+        self._stats_cache_time = 0.0
+        self._stats_cache_ttl = 5
         self.adaptive_level = adaptive_level
         self.performance_mode = performance_mode
-        self._async_queue = asyncio.Queue() if remote_log_url else None
-        self._remote_task = None
-        if self._async_queue:
-            self._start_remote_worker()
+        self._handler_ids: List[int] = []
+        self._removed_default_handler = False
+        self._exception_hook_enabled = bool(enable_exception_hook)
+        self._exception_hook = None
+        self._prev_excepthook = None
+        self._remote_loop = None
+        self._remote_thread = None
+        self._remote_queue = None
+        self._remote_ready = threading.Event()
 
         # 语言选项
         self.language = language if language in ('zh', 'en') else 'zh'
@@ -165,7 +169,11 @@ class XmiLogger:
             self.backtrace = True
 
         # 用于远程日志发送的线程池
-        self._executor = ThreadPoolExecutor(max_workers=max_workers)
+        self._max_workers = max_workers
+        self._executor = None
+        if self.remote_log_url:
+            self._executor = ThreadPoolExecutor(max_workers=max_workers)
+            self._start_remote_sender()
 
         # 初始化 Logger 配置
         self.configure_logger()
@@ -188,18 +196,14 @@ class XmiLogger:
     def _msg(self, key: str, **kwargs) -> str:
         """消息格式化处理，优化性能"""
         try:
-            # 使用缓存键
-            cache_key = f"{self.language}:{key}:{hash(frozenset(kwargs.items()))}"
-            
-            # 检查缓存
-            if cache_key in self._message_cache:
-                return self._message_cache[cache_key]
-            
             # 获取消息模板
             text = self._LANG_MAP.get(self.language, {}).get(key, key)
             
             # 如果没有参数，直接返回模板
             if not kwargs:
+                cache_key = (self.language, key, None)
+                if cache_key in self._message_cache:
+                    return self._message_cache[cache_key]
                 self._message_cache[cache_key] = text
                 return text
             
@@ -208,13 +212,23 @@ class XmiLogger:
             for k, v in kwargs.items():
                 try:
                     if isinstance(v, (list, tuple)):
-                        str_kwargs[k] = [str(item) for item in v]
+                        str_kwargs[k] = tuple(str(item) for item in v)
                     elif isinstance(v, dict):
                         str_kwargs[k] = {str(kk): str(vv) for kk, vv in v.items()}
                     else:
                         str_kwargs[k] = str(v)
                 except Exception:
                     str_kwargs[k] = f"<{type(v).__name__}>"
+
+            frozen_kwargs = tuple(
+                sorted(
+                    (k, tuple(sorted(v.items())) if isinstance(v, dict) else v)
+                    for k, v in str_kwargs.items()
+                )
+            )
+            cache_key = (self.language, key, frozen_kwargs)
+            if cache_key in self._message_cache:
+                return self._message_cache[cache_key]
             
             # 格式化消息
             result = text.format(**str_kwargs)
@@ -237,11 +251,25 @@ class XmiLogger:
             text = self._LANG_MAP.get(self.language, {}).get(key, key)
             return f"{text} (格式化错误: {str(e)})"
 
+    def _remove_handlers(self) -> None:
+        handler_ids = list(self._handler_ids)
+        self._handler_ids.clear()
+        for handler_id in handler_ids:
+            try:
+                self.logger.remove(handler_id)
+            except Exception:
+                continue
+
     def configure_logger(self) -> None:
         """配置日志记录器，添加错误处理和安全性检查"""
         try:
-            # 移除所有现有的处理器
-            self.logger.remove()
+            self._remove_handlers()
+            if not self._removed_default_handler:
+                try:
+                    self.logger.remove(0)
+                except Exception:
+                    pass
+                self._removed_default_handler = True
             
             # 验证配置参数
             self._validate_config()
@@ -263,7 +291,8 @@ class XmiLogger:
                 self._configure_remote_logging()
             
             # 设置异常处理器
-            self.setup_exception_handler()
+            if self._exception_hook_enabled:
+                self.setup_exception_handler()
             
         except Exception as e:
             # 如果配置失败，使用基本配置
@@ -315,7 +344,7 @@ class XmiLogger:
     
     def _add_console_handler(self, log_format: str) -> None:
         """添加控制台处理器"""
-        self.logger.add(
+        handler_id = self.logger.add(
             sys.stdout,
             format=log_format,
             level=self.filter_level,
@@ -323,11 +352,12 @@ class XmiLogger:
             diagnose=self.diagnose,
             backtrace=self.backtrace,
         )
+        self._handler_ids.append(handler_id)
     
     def _add_file_handlers(self, log_format: str) -> None:
         """添加文件处理器"""
         # 主日志文件
-        self.logger.add(
+        handler_id = self.logger.add(
             os.path.join(self.log_dir, f"{self.file_name}.log"),
             format=log_format,
             level=self.filter_level,
@@ -339,9 +369,10 @@ class XmiLogger:
             diagnose=self.diagnose,
             backtrace=self.backtrace,
         )
+        self._handler_ids.append(handler_id)
         
         # 错误日志文件
-        self.logger.add(
+        handler_id = self.logger.add(
             self._get_level_log_path("error"),
             format=log_format,
             level="ERROR",
@@ -353,26 +384,29 @@ class XmiLogger:
             diagnose=self.diagnose,
             backtrace=self.backtrace,
         )
+        self._handler_ids.append(handler_id)
     
     def _fallback_configuration(self) -> None:
         """配置失败时的后备方案"""
-        self.logger.remove()
-        self.logger.add(
+        self._remove_handlers()
+        handler_id = self.logger.add(
             sys.stderr,
             format="<red>{time:YYYY-MM-DD HH:mm:ss}</red> | <level>{level: <8}</level> | <level>{message}</level>",
             level="ERROR"
         )
+        self._handler_ids.append(handler_id)
 
     def _configure_remote_logging(self):
         """
         配置远程日志收集。
         """
         # 当远程日志收集启用时，只发送 ERROR 及以上级别的日志
-        self.logger.add(
+        handler_id = self.logger.add(
             self.remote_sink,
             level="ERROR",
             enqueue=self.enqueue,
         )
+        self._handler_ids.append(handler_id)
 
     def log_with_tag(self, level: str, message: str, tag: str):
         """
@@ -383,6 +417,7 @@ class XmiLogger:
             message: 日志消息
             tag: 标签名称
         """
+        self._update_stats(level)
         log_method = getattr(self.logger, level.lower(), self.logger.info)
         tagged_message = self._msg('LOG_TAGGED', tag=tag, message=message)
         log_method(tagged_message)
@@ -396,6 +431,7 @@ class XmiLogger:
             message: 日志消息
             category: 分类名称
         """
+        self._update_stats(level, category=category)
         log_method = getattr(self.logger, level.lower(), self.logger.info)
         categorized_message = self._msg('LOG_CATEGORY', category=category, message=message)
         log_method(categorized_message)
@@ -452,6 +488,9 @@ class XmiLogger:
                 # 如果格式化失败，使用最基本的错误记录
                 self.logger.opt(exception=True).error(f"未处理的异常: {exc_type.__name__}")
 
+        if self._prev_excepthook is None:
+            self._prev_excepthook = sys.excepthook
+        self._exception_hook = exception_handler
         sys.excepthook = exception_handler
 
     def _get_level_log_path(self, level_name):
@@ -468,117 +507,136 @@ class XmiLogger:
         log_file = f"{log_level}.log"
         return os.path.join(self.log_dir, log_file)
 
-    def _start_remote_worker(self):
-        """启动异步远程日志工作器"""
-        async def remote_worker():
-            while True:
+    def _start_remote_sender(self) -> None:
+        if self._remote_thread and self._remote_thread.is_alive():
+            return
+
+        def remote_thread_target():
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            queue = asyncio.Queue()
+
+            async def remote_worker():
+                connector = aiohttp.TCPConnector(limit=10, limit_per_host=5)
+                timeout = aiohttp.ClientTimeout(total=5)
+                session = aiohttp.ClientSession(connector=connector, timeout=timeout)
                 try:
-                    message = await self._async_queue.get()
-                    await self._send_to_remote_async(message)
-                    self._async_queue.task_done()
-                except Exception as e:
-                    self.logger.error(f"远程日志工作器错误: {e}")
-                await asyncio.sleep(0.1)
-        
-        self._remote_task = asyncio.create_task(remote_worker())
-    
-    async def _send_to_remote_async(self, message: Any) -> None:
-        """异步发送日志到远程服务器，优化性能"""
-        log_entry = message.record
-        
-        # 预构建常用字段，减少重复计算
-        time_str = log_entry["time"].strftime("%Y-%m-%d %H:%M:%S")
-        level_name = log_entry["level"].name
-        request_id = log_entry["extra"].get("request_id", "no-request-id")
-        
-        # 优化文件路径处理
-        file_path = ""
-        if log_entry["file"]:
+                    while True:
+                        payload = await queue.get()
+                        if payload is None:
+                            queue.task_done()
+                            break
+                        try:
+                            await self._post_remote_payload(session, payload)
+                        finally:
+                            queue.task_done()
+                finally:
+                    try:
+                        await session.close()
+                    except Exception:
+                        pass
+                    loop.stop()
+
+            self._remote_loop = loop
+            self._remote_queue = queue
+            self._remote_ready.set()
+            loop.create_task(remote_worker())
+            loop.run_forever()
             try:
-                file_path = os.path.basename(log_entry["file"].path)
-            except (AttributeError, OSError):
-                file_path = str(log_entry["file"])
-        
-        payload = {
-            "time": time_str,
-            "level": level_name,
-            "message": log_entry["message"],
-            "file": file_path,
-            "line": log_entry["line"],
-            "function": log_entry["function"],
-            "request_id": request_id
-        }
-        
-        # 使用连接池优化网络请求
-        connector = aiohttp.TCPConnector(limit=10, limit_per_host=5)
-        timeout = aiohttp.ClientTimeout(total=5)
-        
-        async with aiohttp.ClientSession(connector=connector, timeout=timeout) as session:
-            for attempt in range(3):
-                try:
-                    async with session.post(
-                        self.remote_log_url,
-                        json=payload,
-                        headers={"Content-Type": "application/json"}
-                    ) as response:
-                        response.raise_for_status()
-                        return
-                except Exception as e:
-                    if attempt == 2:
-                        self.logger.warning(
-                            self._msg('FAILED_REMOTE', error=f"最终尝试失败: {e}")
-                        )
-                    await asyncio.sleep(1 * (attempt + 1))
-    
-    def remote_sink(self, message):
-        """优化的远程日志处理器"""
-        if self._async_queue:
-            asyncio.create_task(self._async_queue.put(message))
-        else:
-            self._executor.submit(self._send_to_remote, message)
+                loop.close()
+            except Exception:
+                pass
 
-    def _send_to_remote(self, message) -> None:
-        """Send log message to remote server with retry logic.
-        
-        Args:
-            message: Log message to send
-            
-        Returns:
-            None
-        """
-        """
-        线程池中实际执行的远程日志发送逻辑。
-        """
+        self._remote_ready.clear()
+        self._remote_thread = threading.Thread(target=remote_thread_target, daemon=True)
+        self._remote_thread.start()
+        self._remote_ready.wait(timeout=2)
+
+    async def _post_remote_payload(self, session: aiohttp.ClientSession, payload: Dict[str, Any]) -> None:
+        for attempt in range(3):
+            try:
+                async with session.post(
+                    self.remote_log_url,
+                    json=payload,
+                    headers={"Content-Type": "application/json"},
+                ) as response:
+                    response.raise_for_status()
+                    return
+            except Exception as e:
+                if attempt == 2:
+                    self.logger.warning(self._msg('FAILED_REMOTE', error=f"最终尝试失败: {e}"))
+                    return
+                await asyncio.sleep(1 * (attempt + 1))
+
+    def _build_remote_payload(self, message: Any) -> Dict[str, Any]:
         log_entry = message.record
-        payload = {
-            "time": log_entry["time"].strftime("%Y-%m-%d %H:%M:%S"),
-            "level": log_entry["level"].name,
-            "message": log_entry["message"],
-            "file": os.path.basename(log_entry["file"].path) if log_entry["file"] else "",
-            "line": log_entry["line"],
-            "function": log_entry["function"],
-            "request_id": log_entry["extra"].get("request_id", "no-request-id")
-        }
-        headers = {"Content-Type": "application/json"}
+        try:
+            time_str = log_entry["time"].strftime("%Y-%m-%d %H:%M:%S")
+        except Exception:
+            time_str = str(log_entry.get("time"))
 
+        file_path = ""
+        file_obj = log_entry.get("file")
+        if file_obj:
+            try:
+                file_path = os.path.basename(file_obj.path)
+            except Exception:
+                file_path = str(file_obj)
+
+        return {
+            "time": time_str,
+            "level": getattr(log_entry.get("level"), "name", str(log_entry.get("level"))),
+            "message": log_entry.get("message", ""),
+            "file": file_path,
+            "line": log_entry.get("line"),
+            "function": log_entry.get("function"),
+            "request_id": log_entry.get("extra", {}).get("request_id", "no-request-id"),
+        }
+
+    def remote_sink(self, message):
+        payload = self._build_remote_payload(message)
+        if self._remote_loop and self._remote_queue and self._remote_ready.is_set():
+            try:
+                self._remote_loop.call_soon_threadsafe(self._remote_queue.put_nowait, payload)
+                return
+            except Exception:
+                pass
+        if self._executor is None:
+            self._executor = ThreadPoolExecutor(max_workers=self._max_workers)
+        self._executor.submit(self._send_payload_sync, payload)
+
+    def _stop_remote_sender(self) -> None:
+        loop = self._remote_loop
+        queue = self._remote_queue
+        thread = self._remote_thread
+        if loop and queue and thread and thread.is_alive():
+            try:
+                loop.call_soon_threadsafe(queue.put_nowait, None)
+            except Exception:
+                pass
+            thread.join(timeout=2)
+        self._remote_loop = None
+        self._remote_queue = None
+        self._remote_thread = None
+        self._remote_ready.clear()
+
+    def _send_payload_sync(self, payload: Dict[str, Any]) -> None:
+        headers = {"Content-Type": "application/json"}
         max_retries = 3
-        retry_delay = 1  # seconds
-        
+        retry_delay = 1
         for attempt in range(max_retries):
             try:
                 response = requests.post(
                     self.remote_log_url,
                     headers=headers,
                     json=payload,
-                    timeout=5
+                    timeout=5,
                 )
                 response.raise_for_status()
                 return
             except requests.RequestException as e:
-                if attempt == max_retries - 1:  # Last attempt
-                    self.logger.warning(
-                        self._msg('FAILED_REMOTE', error=f"Final attempt failed: {e}")
-                    )
+                if attempt == max_retries - 1:
+                    self.logger.warning(self._msg('FAILED_REMOTE', error=f"Final attempt failed: {e}"))
                 else:
                     time.sleep(retry_delay * (attempt + 1))
 
@@ -607,6 +665,34 @@ class XmiLogger:
             level (str): 日志级别方法名称。
         """
         return getattr(self.logger, level)
+
+    def log(self, level: str, message: str, *args, **kwargs):
+        self._update_stats(level)
+        return self.logger.log(level, message, *args, **kwargs)
+
+    def debug(self, message: str, *args, **kwargs):
+        self._update_stats("DEBUG")
+        return self.logger.debug(message, *args, **kwargs)
+
+    def info(self, message: str, *args, **kwargs):
+        self._update_stats("INFO")
+        return self.logger.info(message, *args, **kwargs)
+
+    def warning(self, message: str, *args, **kwargs):
+        self._update_stats("WARNING")
+        return self.logger.warning(message, *args, **kwargs)
+
+    def error(self, message: str, *args, **kwargs):
+        self._update_stats("ERROR")
+        return self.logger.error(message, *args, **kwargs)
+
+    def critical(self, message: str, *args, **kwargs):
+        self._update_stats("CRITICAL")
+        return self.logger.critical(message, *args, **kwargs)
+
+    def exception(self, message: str, *args, **kwargs):
+        self._update_stats("ERROR")
+        return self.logger.exception(message, *args, **kwargs)
 
     def log_decorator(self, msg: Optional[str] = None, level: str = "ERROR", trace: bool = True):
         """
@@ -815,9 +901,8 @@ class XmiLogger:
                 self._stats['last_error_time'] = datetime.now()
                 
                 # 计算错误率
-                total_time = (datetime.now() - self._stats_start_time).total_seconds()
-                if total_time > 0:
-                    self._stats['error_rate'] = self._stats['error'] / total_time
+                if self._stats['total'] > 0:
+                    self._stats['error_rate'] = self._stats['error'] / self._stats['total']
     
     def get_stats(self) -> Dict[str, Any]:
         """获取详细的日志统计信息，优化性能"""
@@ -903,47 +988,30 @@ class XmiLogger:
 
     def get_current_location(self) -> str:
         """获取当前调用位置信息，优化性能"""
-        import inspect
-        import threading
-        
-        # 使用线程本地缓存
-        thread_id = threading.get_ident()
-        cache_key = f"location_{thread_id}"
-        
-        # 检查缓存
-        if cache_key in self._location_cache:
-            return self._location_cache[cache_key]
-        
-        frame = inspect.currentframe()
         try:
-            # 获取调用栈
-            stack = inspect.stack()
-            if len(stack) > 1:
-                # 获取调用者的信息
-                caller = stack[1]
-                filename = caller.filename
-                lineno = caller.lineno
-                function = caller.function
-                location = f"{filename}:{lineno}:{function}"
-                
-                # 缓存结果
-                self._location_cache[cache_key] = location
-                
-                # 限制缓存大小
-                if len(self._location_cache) > self._cache_size:
-                    # 清除最旧的缓存项
-                    oldest_key = next(iter(self._location_cache))
-                    del self._location_cache[oldest_key]
-                
-                return location
-            else:
+            frame = inspect.currentframe()
+            if not frame:
                 return "未知位置"
+            caller = frame.f_back
+            if caller and caller.f_code.co_name == "log_with_location":
+                caller = caller.f_back
+            if not caller:
+                return "未知位置"
+            filename = caller.f_code.co_filename
+            lineno = caller.f_lineno
+            function = caller.f_code.co_name
+            return f"{filename}:{lineno}:{function}"
+        except Exception:
+            return "未知位置"
         finally:
-            # 清理frame引用
-            del frame
+            try:
+                del frame
+            except Exception:
+                pass
 
     def log_with_location(self, level: str, message: str, include_location: bool = True):
         """带位置信息的日志记录"""
+        self._update_stats(level)
         if include_location:
             location = self.get_current_location()
             full_message = f"[{location}] {message}"
@@ -1002,8 +1070,7 @@ class XmiLogger:
             elif category:
                 self.log_with_category(level, message, category)
             else:
-                log_method = getattr(self.logger, level.lower(), self.logger.info)
-                log_method(message)
+                self.log(level, message)
 
     async def async_batch_log(self, logs: List[Dict[str, Any]]) -> None:
         """异步批量记录日志"""
@@ -1018,14 +1085,14 @@ class XmiLogger:
             elif category:
                 self.log_with_category(level, message, category)
             else:
-                log_method = getattr(self.logger, level.lower(), self.logger.info)
-                log_method(message)
+                self.log(level, message)
             
             # 小延迟避免阻塞
             await asyncio.sleep(0.001)
 
     def log_with_context(self, level: str, message: str, context: Dict[str, Any] = None):
         """带上下文的日志记录"""
+        self._update_stats(level)
         if context:
             context_str = " | ".join([f"{k}={v}" for k, v in context.items()])
             full_message = f"{message} | {context_str}"
@@ -1037,6 +1104,7 @@ class XmiLogger:
 
     def log_with_timing(self, level: str, message: str, timing_data: Dict[str, float]):
         """带计时信息的日志记录"""
+        self._update_stats(level)
         timing_str = " | ".join([f"{k}={v:.3f}s" for k, v in timing_data.items()])
         full_message = f"{message} | {timing_str}"
         
@@ -1075,8 +1143,7 @@ class XmiLogger:
     def _update_logger_level(self) -> None:
         """更新日志记录器级别"""
         try:
-            # 移除现有处理器
-            self.logger.remove()
+            self._remove_handlers()
             # 重新配置日志记录器
             self.configure_logger()
         except Exception as e:
@@ -1300,13 +1367,28 @@ class XmiLogger:
 
     def cleanup(self) -> None:
         """清理资源"""
-        # 如果有聚合器，停止
         if hasattr(self, 'aggregator'):
             self.aggregator.stop()
-        # 清理缓存
+        try:
+            self._stop_remote_sender()
+        except Exception:
+            pass
+        if self._exception_hook and self._prev_excepthook and sys.excepthook is self._exception_hook:
+            try:
+                sys.excepthook = self._prev_excepthook
+            except Exception:
+                pass
+        if self._executor is not None:
+            try:
+                self._executor.shutdown(wait=False, cancel_futures=True)
+            except Exception:
+                try:
+                    self._executor.shutdown(wait=False)
+                except Exception:
+                    pass
+            self._executor = None
+        self._remove_handlers()
         self.clear_caches()
-        # 强制垃圾回收
         import gc
         gc.collect()
         print("XmiLogger 资源清理完成")
-

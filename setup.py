@@ -30,23 +30,34 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url=about["__url__"],
+    license=about.get("__license__", "MIT"),
     packages=find_packages(),
     include_package_data=True,
-    python_requires='>=3.6',
+    python_requires='>=3.8',
     classifiers=[
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        'loguru==0.7.3',
-        'requests',
-        'aiohttp'
+        "loguru>=0.7,<1.0",
+        "requests>=2.0",
+        "aiohttp>=3.8",
     ],
+    extras_require={
+        "advanced": [
+            "psutil>=5.0",
+            "cryptography>=3.4",
+        ],
+    },
     project_urls={
         "Bug Reports": "https://github.com/wang-zhibo/xmi_logger/issues",
         "Source": "https://github.com/wang-zhibo/xmi_logger",
     },
 )
-
-
 
