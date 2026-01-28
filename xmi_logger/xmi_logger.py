@@ -337,7 +337,7 @@ class XmiLogger:
             "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | "
             "<level>{level: <8}</level> | "
             "ReqID:{extra[request_id]} | "
-            "<cyan>{file}</cyan>:<cyan>{line}</cyan>:<cyan>{function}</cyan> | "
+            "<cyan>{file}</cyan>:<cyan>{line}</cyan> | "
             "<magenta>{process}</magenta> | "
             "<level>{message}</level>"
         )
@@ -418,7 +418,8 @@ class XmiLogger:
             tag: 标签名称
         """
         self._update_stats(level)
-        log_method = getattr(self.logger, level.lower(), self.logger.info)
+        logger_opt = self.logger.opt(depth=1)
+        log_method = getattr(logger_opt, level.lower(), logger_opt.info)
         tagged_message = self._msg('LOG_TAGGED', tag=tag, message=message)
         log_method(tagged_message)
     
@@ -432,7 +433,8 @@ class XmiLogger:
             category: 分类名称
         """
         self._update_stats(level, category=category)
-        log_method = getattr(self.logger, level.lower(), self.logger.info)
+        logger_opt = self.logger.opt(depth=1)
+        log_method = getattr(logger_opt, level.lower(), logger_opt.info)
         categorized_message = self._msg('LOG_CATEGORY', category=category, message=message)
         log_method(categorized_message)
     
@@ -664,35 +666,36 @@ class XmiLogger:
         Args:
             level (str): 日志级别方法名称。
         """
-        return getattr(self.logger, level)
+        logger_method = getattr(self.logger.opt(depth=1), level)
+        return logger_method
 
     def log(self, level: str, message: str, *args, **kwargs):
         self._update_stats(level)
-        return self.logger.log(level, message, *args, **kwargs)
+        return self.logger.opt(depth=1).log(level, message, *args, **kwargs)
 
     def debug(self, message: str, *args, **kwargs):
         self._update_stats("DEBUG")
-        return self.logger.debug(message, *args, **kwargs)
+        return self.logger.opt(depth=1).debug(message, *args, **kwargs)
 
     def info(self, message: str, *args, **kwargs):
         self._update_stats("INFO")
-        return self.logger.info(message, *args, **kwargs)
+        return self.logger.opt(depth=1).info(message, *args, **kwargs)
 
     def warning(self, message: str, *args, **kwargs):
         self._update_stats("WARNING")
-        return self.logger.warning(message, *args, **kwargs)
+        return self.logger.opt(depth=1).warning(message, *args, **kwargs)
 
     def error(self, message: str, *args, **kwargs):
         self._update_stats("ERROR")
-        return self.logger.error(message, *args, **kwargs)
+        return self.logger.opt(depth=1).error(message, *args, **kwargs)
 
     def critical(self, message: str, *args, **kwargs):
         self._update_stats("CRITICAL")
-        return self.logger.critical(message, *args, **kwargs)
+        return self.logger.opt(depth=1).critical(message, *args, **kwargs)
 
     def exception(self, message: str, *args, **kwargs):
         self._update_stats("ERROR")
-        return self.logger.exception(message, *args, **kwargs)
+        return self.logger.opt(depth=1).exception(message, *args, **kwargs)
 
     def log_decorator(self, msg: Optional[str] = None, level: str = "ERROR", trace: bool = True):
         """
@@ -1018,7 +1021,8 @@ class XmiLogger:
         else:
             full_message = message
         
-        log_method = getattr(self.logger, level.lower(), self.logger.info)
+        logger_opt = self.logger.opt(depth=1)
+        log_method = getattr(logger_opt, level.lower(), logger_opt.info)
         log_method(full_message)
 
     def get_performance_stats(self) -> Dict[str, Any]:
@@ -1099,7 +1103,8 @@ class XmiLogger:
         else:
             full_message = message
         
-        log_method = getattr(self.logger, level.lower(), self.logger.info)
+        logger_opt = self.logger.opt(depth=1)
+        log_method = getattr(logger_opt, level.lower(), logger_opt.info)
         log_method(full_message)
 
     def log_with_timing(self, level: str, message: str, timing_data: Dict[str, float]):
@@ -1108,7 +1113,8 @@ class XmiLogger:
         timing_str = " | ".join([f"{k}={v:.3f}s" for k, v in timing_data.items()])
         full_message = f"{message} | {timing_str}"
         
-        log_method = getattr(self.logger, level.lower(), self.logger.info)
+        logger_opt = self.logger.opt(depth=1)
+        log_method = getattr(logger_opt, level.lower(), logger_opt.info)
         log_method(full_message)
 
     def set_adaptive_level(self, error_rate_threshold: float = 0.1, 
